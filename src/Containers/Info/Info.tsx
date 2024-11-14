@@ -11,9 +11,9 @@ const Info = () => {
     <Layout>
       <InfoHero />
       <InfoDetails />
+      <InfoActivities data={activities} />
       <InfoItenaries />
       <InfoHotels />
-      <InfoActivities data={activities} />
     </Layout>
   );
 };

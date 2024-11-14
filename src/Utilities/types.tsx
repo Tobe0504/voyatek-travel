@@ -21,6 +21,7 @@ export type activitiesType = {
   price: number;
   date: string;
   duration: string;
+  type?: string;
 };
 
 export type notificationsType =

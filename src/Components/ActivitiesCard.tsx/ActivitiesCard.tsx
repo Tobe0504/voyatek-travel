@@ -79,15 +79,16 @@ const ActivitiesCard = ({
     }
   };
 
-  //   Effects
-  useEffect(() => {
-    handleImageSetter();
-
-    // eslint-disable-next-line
-  }, [activeImageIndex]);
-
   const handleAddedActivity = () => {
-    const data = { name, address, location, price, date, duration };
+    const data = {
+      name,
+      address,
+      location,
+      price,
+      date,
+      duration,
+      type: "activity",
+    };
 
     const similarItem = itinerary.find((data) => data?.name === name);
 
@@ -108,6 +109,34 @@ const ActivitiesCard = ({
       );
     }
   };
+
+  const handleDeleteActivity = () => {
+    const similarItem = itinerary.find((data) => data?.name === name);
+
+    if (!similarItem) {
+      setNotiticationFunction(
+        setNotifications,
+        "This activity does not exist in your itinerary"
+      );
+    } else {
+      const newItinerary = itinerary.filter((data) => data.name !== name);
+
+      setItinerary(newItinerary);
+
+      setNotiticationFunction(
+        setNotifications,
+        "This item has been deleted successfully",
+        "success"
+      );
+    }
+  };
+
+  //   Effects
+  useEffect(() => {
+    handleImageSetter();
+
+    // eslint-disable-next-line
+  }, [activeImageIndex]);
 
   return (
     <div className="flex  bg-white rounded mb-6">
@@ -194,7 +223,7 @@ const ActivitiesCard = ({
         </div>
       ) : (
         <div className="flex items-center justify-center bg-red-100 p-4">
-          <Delete />
+          <Delete onClick={handleDeleteActivity} />
         </div>
       )}
     </div>

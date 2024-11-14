@@ -19,8 +19,6 @@ const useGetHook = (url: string | null, props?: SWRConfiguration) => {
     error?.message ||
     "There was an issue making this request";
 
-  console.log(error?.response?.data?.message, errorMessage);
-
   // Effects
   useEffect(() => {
     if (error) {

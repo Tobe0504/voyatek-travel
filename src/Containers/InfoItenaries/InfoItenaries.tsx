@@ -1,15 +1,24 @@
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import Flights2 from "../../Assets/SVGs/Flights2";
 import Button from "../../Components/Button/Button";
 import EmptyTabContainer from "../../Components/EmptyTabContainer/EmptyTabContainer";
 import FlightsCard from "../../Components/FlightsCard/FlightsCard";
 import Loader from "../../Components/Loader/Loader";
+import { scrollToTop } from "../../HelperFunctions/scrollToTop";
 import { useFlights } from "../../Hooks/useGetInfo";
 import { flightsType } from "../../Utilities/types";
 
-const InfoItenaries = () => {
+type InfoItenariesType = {
+  isEditable?: boolean;
+};
+
+const InfoItenaries = ({ isEditable }: InfoItenariesType) => {
   // Requests
   const { isLoading, data } = useFlights("2024-12-25");
+
+  // Router
+  const navigate = useNavigate();
 
   // Memo
   const flights: flightsType = useMemo(() => data?.data?.data, [data]);
@@ -26,9 +35,18 @@ const InfoItenaries = () => {
           <Flights2 />
           <span className="font-semibold text-lg text-blue-300">Flights</span>
 
-          <Button className="ml-auto" type="secondary">
-            Add Flights
-          </Button>
+          {isEditable && (
+            <Button
+              className="ml-auto"
+              type="secondary"
+              onClick={() => {
+                navigate("/");
+                scrollToTop();
+              }}
+            >
+              Add Flights
+            </Button>
+          )}
         </div>
 
         {isLoading ? (

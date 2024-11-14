@@ -61,6 +61,11 @@ export const navItems = [
 
 export const sideNavItems = [
   {
+    title: "Itinerary ",
+    icon: <VacationPackages />,
+    route: "/itinerary",
+  },
+  {
     title: "Activities",
     icon: <Activities />,
     route: "/activities",
@@ -95,11 +100,5 @@ export const sideNavItems = [
     title: "Medical",
     icon: <Medical />,
     route: "/medical",
-  },
-
-  {
-    title: "Itinerary ",
-    icon: <VacationPackages />,
-    route: "/itinerary",
   },
 ];

@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Activities from "../../Assets/SVGs/Activities";
 import ActivitiesCard from "../../Components/ActivitiesCard.tsx/ActivitiesCard";
 import Button from "../../Components/Button/Button";
 import EmptyTabContainer from "../../Components/EmptyTabContainer/EmptyTabContainer";
+import { scrollToTop } from "../../HelperFunctions/scrollToTop";
 import { activitiesType } from "../../Utilities/types";
 
 type InfoActivitiesTypes = {
@@ -10,6 +12,9 @@ type InfoActivitiesTypes = {
 };
 
 const InfoActivities = ({ data, isEditable }: InfoActivitiesTypes) => {
+  //   Router
+  const navigate = useNavigate();
+
   return (
     <section className="mt-sectionMarginTop font-body">
       <div className="bg-blue-600 p-6 rounded">
@@ -17,9 +22,18 @@ const InfoActivities = ({ data, isEditable }: InfoActivitiesTypes) => {
           <Activities fill="#fff" />
           <span className="font-semibold text-lg text-white">Activities</span>
 
-          <Button className="ml-auto" type="secondary">
-            Add Activities
-          </Button>
+          {isEditable && (
+            <Button
+              className="ml-auto"
+              type="secondary"
+              onClick={() => {
+                navigate("/");
+                scrollToTop();
+              }}
+            >
+              Add Activities
+            </Button>
+          )}
         </div>
 
         {!data || data?.length < 1 ? (
